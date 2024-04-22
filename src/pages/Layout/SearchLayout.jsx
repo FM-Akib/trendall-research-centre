@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SearchLayout = () => {
     const [openAnswers, setOpenAnswers] = useState({});
@@ -14,12 +14,12 @@ const SearchLayout = () => {
         }));
     };
 
-    const [images, setImageId] = useState([]);
-    useEffect(() => {
-        fetch('/Images.json')
-            .then(response => response.json())
-            .then(data => setImageId(data))
-    }, []);
+    // const [images, setImageId] = useState([]);
+    // useEffect(() => {
+    //     fetch('/Images.json')
+    //         .then(response => response.json())
+    //         .then(data => setImageId(data))
+    // }, []);
 
     const [artifacts, setArtifacts] = useState([]);
     useEffect(() => {
@@ -88,6 +88,14 @@ const SearchLayout = () => {
     const clearFilters = () => {
         setActiveFilters([]);
     };
+ 
+
+     const handleSearch=(e) => {
+        e.preventDefault();
+        const search = e.target.q.value;
+        handleFilterClick(search)
+        // console.log(search);
+     }
 
     return (
         <>
@@ -160,6 +168,36 @@ const SearchLayout = () => {
                                                 <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
                                             </svg>
                                         </button>
+
+
+                                        {/* search bar in attributes */}
+
+                                        <div className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
+                                                    openAnswers['answer-2'] ? '' : 'hidden' }`}
+                                                id="answer-2">
+                                                   <form onSubmit={handleSearch} className="flex w-full justify-center items-center ">
+                                                        <div className="flex relative rounded-md w-full">
+                                                            <input type="text" name="q" id="query" placeholder="search"
+                                                                className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
+                                                            <button type='submit'
+                                                            className="inline-flex items-center gap-1 bg-[#E22232] text-white text-lg font-semibold py-3 px-6 rounded-r-md">
+                                                                
+                                                                <span className="hidden md:block">
+                                                                    <svg className="text-gray-200 h-5 w-5 p-0 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                                                        version="1.1" x="0px" y="0px"
+                                                                        viewBox="0 0 56.966 56.966" 
+                                                                        width="512px" height="512px">
+                                                                        <path
+                                                                            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                                                    </svg>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                        </div>
+
+                                        {/*End search bar in attributes */}
+
                                         {
                                             uniqueArtifactType.map(aArtifact => <div key={aArtifact}
                                                 className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
@@ -167,6 +205,7 @@ const SearchLayout = () => {
                                                     }`}
                                                 id="answer-2"
                                             >
+
                                                 <Link to="#" className="hover:text-red-500" onClick={() => handleFilterClick(aArtifact)}>{aArtifact}</Link>
                                             </div>)
                                         }
@@ -192,6 +231,36 @@ const SearchLayout = () => {
                                                 <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
                                             </svg>
                                         </button>
+                                       
+                                       
+                                        {/* search bar in attributes */}
+
+                                        <div className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
+                                                    openAnswers['answer-3'] ? '' : 'hidden' }`}
+                                                id="answer-3">
+                                                   <form onSubmit={handleSearch} className="flex w-full justify-center items-center ">
+                                                        <div className="flex relative rounded-md w-full">
+                                                            <input type="text" name="q" id="query" placeholder="search"
+                                                                className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
+                                                            <button type='submit'
+                                                            className="inline-flex items-center gap-1 bg-[#E22232] text-white text-lg font-semibold py-3 px-6 rounded-r-md">
+                                                                
+                                                                <span className="hidden md:block">
+                                                                    <svg className="text-gray-200 h-5 w-5 p-0 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                                                        version="1.1" x="0px" y="0px"
+                                                                        viewBox="0 0 56.966 56.966" 
+                                                                        width="512px" height="512px">
+                                                                        <path
+                                                                            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                                                    </svg>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                        </div>
+
+                                        {/*End search bar in attributes */}
+                                       
                                         {
                                             uniquePainter.map(aArtifact => <div key={aArtifact}
                                                 className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
@@ -206,6 +275,9 @@ const SearchLayout = () => {
                                 </div>
                             </div>
                         </section>
+
+
+
 
                         <section className="max-w-5xl mx-auto ">
                             <div className="w-full px-7 md:px-10 xl:px-2 pt-4 bg-white">
@@ -223,6 +295,35 @@ const SearchLayout = () => {
                                                 <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
                                             </svg>
                                         </button>
+                                       
+                                        {/* search bar in attributes */}
+
+                                        <div className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
+                                                    openAnswers['answer-4'] ? '' : 'hidden' }`}
+                                                id="answer-4">
+                                                   <form onSubmit={handleSearch} className="flex w-full justify-center items-center ">
+                                                        <div className="flex relative rounded-md w-full">
+                                                            <input type="text" name="q" id="query" placeholder="search"
+                                                                className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
+                                                            <button type='submit'
+                                                            className="inline-flex items-center gap-1 bg-[#E22232] text-white text-lg font-semibold py-3 px-6 rounded-r-md">
+                                                                
+                                                                <span className="hidden md:block">
+                                                                    <svg className="text-gray-200 h-5 w-5 p-0 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                                                        version="1.1" x="0px" y="0px"
+                                                                        viewBox="0 0 56.966 56.966" 
+                                                                        width="512px" height="512px">
+                                                                        <path
+                                                                            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                                                    </svg>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                        </div>
+
+                                        {/*End search bar in attributes */}
+                                       
                                         {
                                             uniqueProvenance.map(aProvenance => <div key={aProvenance}
                                                 className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
@@ -254,6 +355,35 @@ const SearchLayout = () => {
                                                 <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
                                             </svg>
                                         </button>
+                                       
+                                        {/* search bar in attributes */}
+
+                                        <div className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
+                                                    openAnswers['answer-5'] ? '' : 'hidden' }`}
+                                                id="answer-5">
+                                                   <form onSubmit={handleSearch} className="flex w-full justify-center items-center ">
+                                                        <div className="flex relative rounded-md w-full">
+                                                            <input type="text" name="q" id="query" placeholder="search"
+                                                                className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
+                                                            <button type='submit'
+                                                            className="inline-flex items-center gap-1 bg-[#E22232] text-white text-lg font-semibold py-3 px-6 rounded-r-md">
+                                                                
+                                                                <span className="hidden md:block">
+                                                                    <svg className="text-gray-200 h-5 w-5 p-0 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                                                        version="1.1" x="0px" y="0px"
+                                                                        viewBox="0 0 56.966 56.966" 
+                                                                        width="512px" height="512px">
+                                                                        <path
+                                                                            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                                                    </svg>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                        </div>
+
+                                        {/*End search bar in attributes */}
+                                       
                                         {
                                             uniquePhysicalDimensions.map(aDimensions => <div key={aDimensions}
                                                 className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
@@ -275,8 +405,8 @@ const SearchLayout = () => {
                 <div className="col-span-7 pt-14 pl-6">
                     {/* Display filtered artifacts */}
                     {filterArtifacts().map((artifact, index) => (
-                        <div key={index} className="border-b border-gray-300 py-4">
-                            <img className="h-28 rounded" src={artifact.imageID} alt="" />
+                        <div key={index} className="border-b border-gray-300 px-3 py-4">
+                            <img className="h-28 rounded" src={artifact.URL} alt="" />
                             <h2 className="text-xl font-bold text-gray-800">{artifact.artefactType}</h2>
                             <h3 className="text-red-600">Painter: {artifact.painter} || Dimension: {artifact.physicalDimensions}</h3>
 
