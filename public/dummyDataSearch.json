@@ -92,7 +92,7 @@
       {
         "imageID": "https://artefactimages.s3.ap-southeast-2.amazonaws.com/P-3-4.jpg",
         "artefactType": "Calyx-kraters",
-        "painter": "TheDircegroup",
+        "painter": "TheINDircegroup",
         "artefactNumber": "10",
         "provenance": "New York 05.11.5, from Myrina.",
         "physicalDimensions": "Ht. 52, diam. 50",
@@ -102,7 +102,7 @@
       {
         "imageID": "https://artefactimages.s3.ap-southeast-2.amazonaws.com/P-3-4.jpg",
         "artefactType": "Calyx-kraters",
-        "painter": "TheDircegroup",
+        "painter": "TheINDircegroup",
         "artefactNumber": "11",
         "provenance": "London E16.9, from Ceglie del Campo (nr. Bari).",
         "physicalDimensions": "Ht. 45, diam. 41",
@@ -142,7 +142,7 @@
       {
         "imageID": "https://artefactimages.s3.ap-southeast-2.amazonaws.com/P-3-4.jpg",
         "artefactType": "Calyx-kraters",
-        "painter": "TheDircegroup",
+        "painter": "TheINDircegroup",
         "artefactNumber": "15",
         "provenance": "Naples 24616, from Ceglie del Campo (nr. Bari).",
         "physicalDimensions": "Ht. 48-5, diam. 46",
@@ -171,7 +171,7 @@
       },
       {
         "imageID": "https://artefactimages.s3.ap-southeast-2.amazonaws.com/P-3-4.jpg",
-        "artefactType": "Calyx-kraters",
+        "artefactType": "athethan",
         "painter": "TheDircegroup",
         "artefactNumber": "18",
         "provenance": "Taranto 2444, from Ceglie del Campo (nr. Bari).",
@@ -181,7 +181,7 @@
       },
       {
         "imageID": "https://artefactimages.s3.ap-southeast-2.amazonaws.com/P-3-4.jpg",
-        "artefactType": "Calyx-kraters",
+        "artefactType": "athethan",
         "painter": "TheDircegroup",
         "artefactNumber": "19",
         "provenance": "Taranto 2445, from Ceglie del Campo (nr. Bari).",
@@ -191,7 +191,7 @@
       },
       {
         "imageID": "https://artefactimages.s3.ap-southeast-2.amazonaws.com/P-3-4.jpg",
-        "artefactType": "Calyx-kraters",
+        "artefactType": "athethan",
         "painter": "TheDircegroup",
         "artefactNumber": "20",
         "provenance": "Vienna 333, from Ceglie del Campo (nr. Bari).",

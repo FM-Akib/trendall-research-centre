@@ -20,7 +20,7 @@ const SearchSection = () => {
                 <h2 className="text-3xl font-semibold tracking-wide">Basic Search</h2>
                 <p className="text-gray-800">For searching in basic way click bellow.</p>
             </div>
-            <Link to="/basicsearch">
+            <Link to="/searchtec/all">
             <button type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-[#E22232] hover:bg-[#f23343] text-gray-50">Basic Search</button>
             </Link>
         </div>
