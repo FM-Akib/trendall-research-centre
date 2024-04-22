@@ -9,7 +9,7 @@ const SearchTechnique = () => {
             .then(data => setAllData(data))
             .catch(error => console.error('Error fetching data:', error)); 
     }, []);
-    console.log(allData);
+    // console.log(allData);
     return (
         <div>
            {

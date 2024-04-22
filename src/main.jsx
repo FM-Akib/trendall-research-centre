@@ -16,6 +16,7 @@ import IndividualCard from './pages/AdvancedSearch/IndividualCard';
 import ANews from './pages/News/ANews';
 import SearchLayout from './pages/Layout/SearchLayout';
 import SearchTechnique from './pages/SearchTechnique/SearchTechnique';
+import ShowImage from './pages/SearchTechnique/ShowImage';
 
 
 const router = createBrowserRouter([
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: 'all',
         element: <SearchTechnique></SearchTechnique>
+      },
+      {
+        path: 'showimg/:imageId',
+        element: <ShowImage></ShowImage>
       }
     ]
   }

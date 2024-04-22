@@ -8,7 +8,7 @@ const IndividualCard = () => {
 
    
     const Adata = data.filter(item => item._id === parseInt(id))
-    console.log(Adata);
+    // console.log(Adata);
    const {fabric,CurrentCollection,PreviousCollections,img,PublicationRecord,Decoration} = Adata[0];
     return (
         <div>
