@@ -20,14 +20,14 @@ const SearchLayout = () => {
         .then(data => setImageId(data))
     },[])
 
-    console.log(images)
+    // console.log(images)
 
     return (
         <>
             <Navbar />
             <div className="grid grid-cols-10 w-[80%] mx-auto">
                 <div className="col-span-3 bg-white h-screen ">
-                    <div className="bg-white pt-14 menu">
+                    <div className="bg-white pt-14 menu overflow-y-scroll max-h-screen">
 
 
                         <section className="max-w-5xl mx-auto">
@@ -46,27 +46,17 @@ const SearchLayout = () => {
                                                 <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
                                             </svg>
                                         </button>
-
                                         {
                                             images.map(imgg=><div key={imgg.ImageID}
-                                                className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
+                                                className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium flex justify-between ${
                                                     openAnswers['answer-1'] ? '' : 'hidden' // Show if this answer is open
                                                     }`}
                                                 id="answer-1"
                                             >
                                                 <Link to={`/searchtec/showimg/${imgg.ImageID}`}  className="hover:text-red-500">{imgg.ImageID}</Link>
+                                                <Link to="/searchtec/all" className=" ml-2 hover:text-red-500" >Cancel</Link>
                                             </div> )
-                                        }
-
-                                        {/* <div
-                                            className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
-                                                openAnswers['answer-1'] ? '' : 'hidden' // Show if this answer is open
-                                                }`}
-                                            id="answer-1"
-                                        >
-                                            <Link to="" className="hover:text-red-500">Peer-reviewed (1222)</Link>
-                                        </div> */}
-                                        
+                                        }                                        
                                     </div>
                                 </div>
                             </div>
