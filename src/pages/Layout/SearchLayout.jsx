@@ -11,14 +11,10 @@ const SearchLayout = () => {
     const [artifacts, setArtifacts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [visiblePages, setVisiblePages] = useState(10);
+    const [startIndex, setStartIndex] = useState(0);
+    const [endIndex, setEndIndex] = useState(visiblePages - 1);
 
 
-
-    //pagenation - claculating page number 
-    // const {count} = useLoaderData();
-    // const artefactsPerPage = 20;
-    // const numberOfPages = Math.ceil(count/artefactsPerPage);
-    // const pages  = [...Array(numberOfPages).keys()];
 
 
 
@@ -30,6 +26,7 @@ const SearchLayout = () => {
         }));
     };
 
+    // fetching all data from server - mongodb database
     const { data: allArtefacts = [], isPending, error } = useQuery({
         queryKey: ['all-artefacts'],
         queryFn: async () => {
@@ -141,18 +138,29 @@ const SearchLayout = () => {
         // console.log(search);
      }
 
+
+
+
+
+
+
     const itemsPerPage= 30;
+
     const totalPages = Math.ceil( filterArtifacts().length / itemsPerPage);
     const handleClick = (type) => {
         if (type === "prev") {
           setCurrentPage((prevPage) => prevPage - 1);
           if (currentPage - 1 < visiblePages - 1) {
             setVisiblePages((prevVisible) => prevVisible - 1);
+            setStartIndex((prevStart) => prevStart - 1);
+            setEndIndex((prevEnd) => prevEnd - 1);
           }
         } else if (type === "next") {
           setCurrentPage((prevPage) => prevPage + 1);
           if (currentPage + 1 > visiblePages) {
             setVisiblePages((prevVisible) => prevVisible + 1);
+            setStartIndex((prevStart) => prevStart + 1);
+            setEndIndex((prevEnd) => prevEnd + 1);
           }
         } else {
           setCurrentPage(type);
@@ -163,7 +171,6 @@ const SearchLayout = () => {
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
       );
-
     return (
         <>
             <Navbar />
@@ -460,6 +467,9 @@ const SearchLayout = () => {
                     {/* <Outlet /> */}
                     </div>
 
+
+
+{/* pagination here */}
                     <div className="flex flex-col items-center justify-center">
                     <div className="my-8">
         <button
@@ -469,20 +479,21 @@ const SearchLayout = () => {
         >
           Prev
         </button>
-        {[...Array(totalPages).keys()].slice(
-          currentPage - 1,
-          visiblePages
-        ).map((page) => (
-          <button
-            key={page}
-            onClick={() => handleClick(page + 1)}
-            className={`px-4 py-2 mr-2 ${
-              currentPage === page + 1 ? "bg-red-600 text-white" : "bg-gray-200"
-            } rounded`}
-          >
-            {page + 1}
-          </button>
-        ))}
+        {[...Array(totalPages).keys()]
+          .slice(startIndex, endIndex + 1)
+          .map((page) => (
+            <button
+              key={page}
+              onClick={() => handleClick(page + 1)}
+              className={`px-4 py-2 mr-2 ${
+                currentPage === page + 1
+                  ? "bg-red-600 text-white"
+                  : "bg-gray-200"
+              } rounded`}
+            >
+              {page + 1}
+            </button>
+          ))}
         <button
           onClick={() => handleClick("next")}
           disabled={currentPage === totalPages}
