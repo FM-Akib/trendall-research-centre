@@ -17,32 +17,66 @@ const SearchLayout = () => {
         }));
     };
 
+    const { data: allArtefacts = [], isPending, error } = useQuery({
+        queryKey: ['all-artefacts'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/artefacts-all');
+            return res.json();
+        },
+        enabled: !!activeFilters, // Fetch data only when activeFilters change
+    });
+
     const [artifacts, setArtifacts] = useState([]);
+
     useEffect(() => {
-        fetch('/dummyDataSearch.json')
-            .then(response => response.json())
-            .then(data => setArtifacts(data))
-    }, [activeFilters]); // Update artifacts when activeFilters change
+        if (!isPending && !error) {
+            setArtifacts(allArtefacts);
+        }
+    }, [allArtefacts, isPending, error]);
 
-
-   const {data: allArtefacts = [],isPending,error} = useQuery({
-    queryKey:['all-artefacts'],
-    queryFn: async () =>{
-        const res =  await fetch('http://localhost:5000/artefacts-all')
-        return res.json();
+    if (isPending) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="relative inline-flex">
+                    <div className="w-8 h-8 bg-red-500 rounded-full"></div>
+                    <div className="w-8 h-8 bg-red-500 rounded-full absolute top-0 left-0 animate-ping"></div>
+                    <div className="w-8 h-8 bg-red-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
+                </div>
+            </div>
+        );
     }
-   })
-console.log(allArtefacts);
 
-if (isPending) return <div className="flex justify-center items-center h-screen">
-<div className="relative inline-flex">
-    <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
-    <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
-    <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
-</div>
-</div>
+    if (error) {
+        return 'An error has occurred: ' + error.message;
+    }
+    console.log(artifacts)
 
-if (error) return 'An error has occurred: ' + error.message
+//     const [artifacts, setArtifacts] = useState([]);
+//     useEffect(() => {
+//         fetch('/dummyDataSearch.json')
+//             .then(response => response.json())
+//             .then(data => setArtifacts(data))
+//     }, [activeFilters]); // Update artifacts when activeFilters change
+
+
+//    const {data: allArtefacts = [],isPending,error} = useQuery({
+//     queryKey:['all-artefacts'],
+//     queryFn: async () =>{
+//         const res =  await fetch('http://localhost:5000/artefacts-all')
+//         return res.json();
+//     }
+//    })
+// console.log(allArtefacts);
+// setArtifacts(allArtefacts)
+// if (isPending) return <div className="flex justify-center items-center h-screen">
+// <div className="relative inline-flex">
+//     <div className="w-8 h-8 bg-red-500 rounded-full"></div>
+//     <div className="w-8 h-8 bg-red-500 rounded-full absolute top-0 left-0 animate-ping"></div>
+//     <div className="w-8 h-8 bg-red-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
+// </div>
+// </div>
+
+// if (error) return 'An error has occurred: ' + error.message
 
 
 
@@ -396,17 +430,18 @@ if (error) return 'An error has occurred: ' + error.message
                         {/* Add more sections as needed */}
                     </div>
                 </div>
-                <div className="col-span-7 pt-14 pl-6">
+                <div className="col-span-7 pt-14 pl-6 overflow-y-scroll max-h-screen">
                     {/* Display filtered artifacts */}
                     {filterArtifacts().map((artifact, index) => (
                         <div key={index} className="border-b border-gray-300 px-3 py-4">
-                            <img className="h-28 rounded" src={artifact.URL} alt="" />
-                            <h2 className="text-xl font-bold text-gray-800">{artifact.artefactType}</h2>
-                            <h3 className="text-red-600">Painter: {artifact.painter} || Dimension: {artifact.physicalDimensions}</h3>
+                            <img className="h-28 rounded" src={artifact.URL ? artifact.URL: artifact.ImageId} alt={artifact.ImageId} />
+                            <h2 className="text-xl font-bold text-gray-800">{artifact["Artefact Type"]}</h2>
+                            <h3 className="text-red-600">Painter: {artifact.Painter} || Dimension: {artifact["Physical Dimensions"]}</h3>
+                            <h3 className="text-gray-600">Artefact Number: {artifact["Artefact Number"]} || Chapter: {artifact.Chapter}</h3>
 
-                            <p className="text-gray-600"><span className="font-semibold">Provenance:</span> {artifact.provenance}</p>
-                            <p className="text-gray-600"><span className="font-semibold">Publications:</span> {artifact.publications}</p>
-                            <p className="text-gray-600"><span className="font-semibold">Description:</span> {artifact.description}</p>
+                            <p className="text-gray-600"><span className="font-semibold">Provenance:</span> {artifact.Provenance}</p>
+                            <p className="text-gray-600"><span className="font-semibold">Publications:</span> {artifact.Publications}</p>
+                            <p className="text-gray-600"><span className="font-semibold">Description:</span> {artifact.Description}</p>
                             {/* Add more details as needed */}
                         </div>
                     ))}
