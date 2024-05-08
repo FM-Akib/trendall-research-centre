@@ -8,6 +8,19 @@ import { useQuery } from "@tanstack/react-query";
 const SearchLayout = () => {
     const [openAnswers, setOpenAnswers] = useState({});
     const [activeFilters, setActiveFilters] = useState([]);
+    const [artifacts, setArtifacts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [visiblePages, setVisiblePages] = useState(10);
+
+
+
+    //pagenation - claculating page number 
+    // const {count} = useLoaderData();
+    // const artefactsPerPage = 20;
+    // const numberOfPages = Math.ceil(count/artefactsPerPage);
+    // const pages  = [...Array(numberOfPages).keys()];
+
+
 
     // Function to toggle the visibility of the answer
     const toggleAnswer = (targetId) => {
@@ -26,7 +39,7 @@ const SearchLayout = () => {
         enabled: !!activeFilters, // Fetch data only when activeFilters change
     });
 
-    const [artifacts, setArtifacts] = useState([]);
+  
 
     useEffect(() => {
         if (!isPending && !error) {
@@ -41,7 +54,7 @@ const SearchLayout = () => {
     <div className='h-8 w-8 bg-red-600 rounded-full animate-bounce [animation-delay:-0.3s]'></div>
 	<div className='h-8 w-8 bg-red-600 rounded-full animate-bounce [animation-delay:-0.15s]'></div>
 	<div className='h-8 w-8 bg-red-600 rounded-full animate-bounce'></div>
-</div>
+    </div>
         );
     }
 
@@ -56,33 +69,6 @@ const SearchLayout = () => {
 //             .then(response => response.json())
 //             .then(data => setArtifacts(data))
 //     }, [activeFilters]); // Update artifacts when activeFilters change
-
-
-//    const {data: allArtefacts = [],isPending,error} = useQuery({
-//     queryKey:['all-artefacts'],
-//     queryFn: async () =>{
-//         const res =  await fetch('http://localhost:5000/artefacts-all')
-//         return res.json();
-//     }
-//    })
-// console.log(allArtefacts);
-// setArtifacts(allArtefacts)
-// if (isPending) return <div className="flex justify-center items-center h-screen">
-// <div className="relative inline-flex">
-//     <div className="w-8 h-8 bg-red-500 rounded-full"></div>
-//     <div className="w-8 h-8 bg-red-500 rounded-full absolute top-0 left-0 animate-ping"></div>
-//     <div className="w-8 h-8 bg-red-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
-// </div>
-// </div>
-
-// if (error) return 'An error has occurred: ' + error.message
-
-
-
-
-
-
-
 
 
 
@@ -154,6 +140,29 @@ const SearchLayout = () => {
         handleFilterClick(search)
         // console.log(search);
      }
+
+    const itemsPerPage= 30;
+    const totalPages = Math.ceil( filterArtifacts().length / itemsPerPage);
+    const handleClick = (type) => {
+        if (type === "prev") {
+          setCurrentPage((prevPage) => prevPage - 1);
+          if (currentPage - 1 < visiblePages - 1) {
+            setVisiblePages((prevVisible) => prevVisible - 1);
+          }
+        } else if (type === "next") {
+          setCurrentPage((prevPage) => prevPage + 1);
+          if (currentPage + 1 > visiblePages) {
+            setVisiblePages((prevVisible) => prevVisible + 1);
+          }
+        } else {
+          setCurrentPage(type);
+        }
+      };
+    
+      const paginatedData = filterArtifacts().slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+      );
 
     return (
         <>
@@ -429,9 +438,11 @@ const SearchLayout = () => {
                         {/* Add more sections as needed */}
                     </div>
                 </div>
-                <div className="col-span-9 pt-14 pl-6 overflow-y-scroll max-h-screen">
+
+                <div className="col-span-9 ">
+                <div className="pt-14 pl-6 overflow-y-scroll max-h-screen">
                     {/* Display filtered artifacts */}
-                    {filterArtifacts().map((artifact, index) => (
+                    {paginatedData.map((artifact, index) => (
                         <div key={index} className="border-b border-gray-300 px-4 py-4">
                             <img className="h-28 rounded" src={artifact.URL ? artifact.URL: artifact.ImageId} alt={artifact.ImageId} />
                             <h2 className="text-xl font-bold text-gray-800">{artifact["Artefact Type"]}</h2>
@@ -447,6 +458,43 @@ const SearchLayout = () => {
                         </div>
                     ))}
                     {/* <Outlet /> */}
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center">
+                    <div className="my-8">
+        <button
+          onClick={() => handleClick("prev")}
+          disabled={currentPage === 1}
+          className="px-4 py-2 mr-2 bg-red-600 text-white rounded"
+        >
+          Prev
+        </button>
+        {[...Array(totalPages).keys()].slice(
+          currentPage - 1,
+          visiblePages
+        ).map((page) => (
+          <button
+            key={page}
+            onClick={() => handleClick(page + 1)}
+            className={`px-4 py-2 mr-2 ${
+              currentPage === page + 1 ? "bg-red-600 text-white" : "bg-gray-200"
+            } rounded`}
+          >
+            {page + 1}
+          </button>
+        ))}
+        <button
+          onClick={() => handleClick("next")}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 ml-2 bg-red-600 text-white rounded"
+        >
+          Next
+        </button>
+      </div>
+
+    </div>
+                 
+
                 </div>
             </div>
         </>

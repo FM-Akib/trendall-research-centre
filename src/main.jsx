@@ -71,6 +71,7 @@ const router = createBrowserRouter([
   {
     path:'searchtec',
     element: <SearchLayout></SearchLayout>,
+    loader: ()=> fetch('http://localhost:5000/artefacts-element-count'),
     children: [
       {
         path: 'all',
