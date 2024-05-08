@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+
+
 
 const SearchLayout = () => {
     const [openAnswers, setOpenAnswers] = useState({});
@@ -14,19 +17,41 @@ const SearchLayout = () => {
         }));
     };
 
-    // const [images, setImageId] = useState([]);
-    // useEffect(() => {
-    //     fetch('/Images.json')
-    //         .then(response => response.json())
-    //         .then(data => setImageId(data))
-    // }, []);
-
     const [artifacts, setArtifacts] = useState([]);
     useEffect(() => {
         fetch('/dummyDataSearch.json')
             .then(response => response.json())
             .then(data => setArtifacts(data))
     }, [activeFilters]); // Update artifacts when activeFilters change
+
+
+   const {data: allArtefacts = [],isPending,error} = useQuery({
+    queryKey:['all-artefacts'],
+    queryFn: async () =>{
+        const res =  await fetch('http://localhost:5000/artefacts-all')
+        return res.json();
+    }
+   })
+console.log(allArtefacts);
+
+if (isPending) return <div className="flex justify-center items-center h-screen">
+<div className="relative inline-flex">
+    <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
+    <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
+    <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
+</div>
+</div>
+
+if (error) return 'An error has occurred: ' + error.message
+
+
+
+
+
+
+
+
+
 
     let desired_artifact = (details) => {
         let unique_values = [
@@ -120,37 +145,6 @@ const SearchLayout = () => {
                         </div>
 
 
-                        {/* <section className="max-w-5xl mx-auto">
-                            <div className="w-full px-7 md:px-10 xl:px-2 bg-white">
-                                <div className="mx-auto w-full max-w-5xl border border-slate-400/20 rounded-lg bg-white ">
-                                    <div className="border-b border-[#0A071B]/10">
-                                        <button
-                                            className="question-btn flex w-full items-start gap-x-5 justify-between rounded-lg text-left text-lg font-bold text-slate-800 focus:outline-none p-5"
-                                            onClick={() => toggleAnswer('answer-1')} >
-                                            <span>ImageId</span>
-                                            <svg className={`mt-1.5 md:mt-0 flex-shrink-0 transform h-5 w-5 text-[#5B5675] ${
-                                                openAnswers['answer-1'] ? 'rotate-180' : '' // Rotate if this answer is open
-                                            }`}
-                                                viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
-                                            </svg>
-                                        </button>
-                                        {
-                                            images.map(imgg => <div key={imgg.ImageID}
-                                                className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium flex justify-between ${
-                                                    openAnswers['answer-1'] ? '' : 'hidden' // Show if this answer is open
-                                                    }`}
-                                                id="answer-1"
-                                            >
-                                                <Link to={`/searchtec/showimg/${imgg.ImageID}`} className="hover:text-red-500">{imgg.ImageID}</Link>
-                                               
-                                            </div>)
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </section> */}
 
                         <section className="max-w-5xl mx-auto ">
                             <div className="w-full px-7 md:px-10 xl:px-2 pt-4 bg-white">
