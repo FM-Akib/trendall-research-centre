@@ -45,14 +45,14 @@ const SearchLayout = () => {
     }, [allArtefacts, isPending, error]);
 
     if (isPending) {
-        return (
-    <div className='flex space-x-2 justify-center items-center bg-white h-screen '>
+    return (
+    <div className='flex space-x-3 justify-center items-center bg-white h-screen '>
     <span className='sr-only'>Loading...</span>
-    <div className='h-8 w-8 bg-red-600 rounded-full animate-bounce [animation-delay:-0.3s]'></div>
-	<div className='h-8 w-8 bg-red-600 rounded-full animate-bounce [animation-delay:-0.15s]'></div>
-	<div className='h-8 w-8 bg-red-600 rounded-full animate-bounce'></div>
+    <div className='h-4 w-4 bg-red-600 rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+	<div className='h-4 w-4 bg-red-600 rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+	<div className='h-4 w-4 bg-red-600 rounded-full animate-bounce'></div>
     </div>
-        );
+    );
     }
 
     if (error) {
@@ -141,7 +141,7 @@ const SearchLayout = () => {
 
 
 
-
+//Pagination code here ...
 
 
     const itemsPerPage= 30;
@@ -470,13 +470,12 @@ const SearchLayout = () => {
 
 
 {/* pagination here */}
-                    <div className="flex flex-col items-center justify-center">
-                    <div className="my-8">
+<div className="flex flex-col items-center justify-center">
+    <div className="my-8">
         <button
           onClick={() => handleClick("prev")}
           disabled={currentPage === 1}
-          className="px-4 py-2 mr-2 bg-red-600 text-white rounded"
-        >
+          className="px-4 py-2 mr-2 bg-red-600 text-white rounded">
           Prev
         </button>
         {[...Array(totalPages).keys()]
@@ -506,9 +505,9 @@ const SearchLayout = () => {
     </div>
                  
 
-                </div>
-            </div>
-        </>
+        </div>
+    </div>
+</>
     );
 };
 
