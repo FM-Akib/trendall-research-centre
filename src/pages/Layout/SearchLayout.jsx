@@ -30,13 +30,13 @@ const SearchLayout = () => {
     const { data: allArtefacts = [], isPending, error } = useQuery({
         queryKey: ['all-artefacts'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/artefacts-all');
+            const res = await fetch('https://trendall-research-center-server.vercel.app/artefacts-all');
             return res.json();
         },
         enabled: !!activeFilters, // Fetch data only when activeFilters change
     });
 
-  
+//   Local computer server: http://localhost:5000/artefacts-all
 
     useEffect(() => {
         if (!isPending && !error) {
