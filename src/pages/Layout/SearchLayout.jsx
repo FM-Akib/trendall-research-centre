@@ -16,8 +16,10 @@ const SearchLayout = () => {
     
     const [search, setSearch] = useState("");
     const [searchPainter, setSearchPainter] = useState("");
+    const [searchProvenance, setSearchProvenance] = useState("");
+    const [searchPhysicalDimensions, setSearchPhysicalDimensions] = useState("");
 
-console.log(searchPainter)
+
 
 
     // Function to toggle the visibility of the answer
@@ -224,7 +226,6 @@ console.log(searchPainter)
                                                 id="answer-2">
 
 
-{/* UnderConstraction */}
 
                                                    <form onSubmit={handleSearch} onChange={(e)=>{setSearch(e.target.value)}} className="flex w-full justify-center items-center ">
                                                         <div className="flex relative rounded-md w-full">
@@ -289,7 +290,7 @@ console.log(searchPainter)
                                         <div className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-3'] ? '' : 'hidden' }`}
                                                 id="answer-3">
-                                                   <form onSubmit={handleSearch}  onChange={(e)=>{setSearch(e.target.value)}} className="flex w-full justify-center items-center ">
+                                                   <form onSubmit={handleSearch}  onChange={(e)=>{setSearchPainter(e.target.value)}} className="flex w-full justify-center items-center ">
                                                         <div className="flex relative rounded-md w-full">
                                                             <input type="text" name="q" id="query" placeholder="search"
                                                                 className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
@@ -313,7 +314,7 @@ console.log(searchPainter)
                                         {/*End search bar in attributes */}
                                        
                                         {
-                                            uniquePainter.filter((item) => { return search.toLowerCase()===''? item : item?.toLowerCase().includes(search)}).map(aArtifact => <div key={aArtifact}
+                                            uniquePainter.filter((item) => { return searchPainter.toLowerCase()===''? item : item?.toLowerCase().includes(searchPainter)}).map(aArtifact => <div key={aArtifact}
                                                 className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-3'] ? '' : 'hidden' // Show if this answer is open
                                                     }`}
@@ -352,7 +353,7 @@ console.log(searchPainter)
                                         <div className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-4'] ? '' : 'hidden' }`}
                                                 id="answer-4">
-                                                   <form onSubmit={handleSearch} onChange={(e)=>{setSearch(e.target.value)}} className="flex w-full justify-center items-center ">
+                                                   <form onSubmit={handleSearch} onChange={(e)=>{setSearchProvenance(e.target.value)}} className="flex w-full justify-center items-center ">
                                                         <div className="flex relative rounded-md w-full">
                                                             <input type="text" name="q" id="query" placeholder="search"
                                                                 className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
@@ -376,7 +377,7 @@ console.log(searchPainter)
                                         {/*End search bar in attributes */}
                                        
                                         {
-                                            uniqueProvenance.filter((item) => { return search.toLowerCase()===''? item : item?.toLowerCase().includes(search)}).map(aProvenance => <div key={aProvenance}
+                                            uniqueProvenance.filter((item) => { return searchProvenance.toLowerCase()===''? item : item?.toLowerCase().includes(searchProvenance)}).map(aProvenance => <div key={aProvenance}
                                                 className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-4'] ? '' : 'hidden' // Show if this answer is open
                                                     }`}
@@ -412,7 +413,7 @@ console.log(searchPainter)
                                         <div className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-5'] ? '' : 'hidden' }`}
                                                 id="answer-5">
-                                                   <form onSubmit={handleSearch} onChange={(e)=>{setSearch(e.target.value)}} className="flex w-full justify-center items-center ">
+                                                   <form onSubmit={handleSearch} onChange={(e)=>{setSearchPhysicalDimensions(e.target.value)}} className="flex w-full justify-center items-center ">
                                                         <div className="flex relative rounded-md w-full">
                                                             <input type="text" name="q" id="query" placeholder="search"
                                                                 className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
@@ -436,7 +437,7 @@ console.log(searchPainter)
                                         {/*End search bar in attributes */}
                                        
                                         {
-                                            uniquePhysicalDimensions.filter((item) => { return search.toLowerCase()===''? item : item?.toLowerCase().includes(search)}).map(aDimensions => <div key={aDimensions}
+                                            uniquePhysicalDimensions.filter((item) => { return searchPhysicalDimensions.toLowerCase()===''? item : item?.toLowerCase().includes(searchPhysicalDimensions)}).map(aDimensions => <div key={aDimensions}
                                                 className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-5'] ? '' : 'hidden' // Show if this answer is open
                                                     }`}

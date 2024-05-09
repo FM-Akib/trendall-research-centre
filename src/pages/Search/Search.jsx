@@ -17,7 +17,7 @@ const Search = () => {
 			<p className="text-gray-800">For searching click bellow.</p>
 		</div>
 		<Link to="/searchtec/all">
-		<button type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-[#E22232] hover:bg-[#f23343] text-gray-50">Basic Search</button>
+		<button type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md bg-[#E22232] hover:bg-[#f23343] text-gray-50">Artefact Search</button>
 		</Link>
 	</div>
     </div>

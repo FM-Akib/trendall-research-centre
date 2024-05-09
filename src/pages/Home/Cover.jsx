@@ -30,11 +30,11 @@ const Cover = () => {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide><img src={img1}/></SwiperSlide>
+        <SwiperSlide><img src={img5}/></SwiperSlide>
         <SwiperSlide><img src={img2}/></SwiperSlide>
         <SwiperSlide><img src={img3}/></SwiperSlide>
         <SwiperSlide><img src={img4}/></SwiperSlide>
-        <SwiperSlide><img src={img5}/></SwiperSlide>
+        <SwiperSlide><img src={img1}/></SwiperSlide>
         <SwiperSlide><img src={img6}/></SwiperSlide>
        
         

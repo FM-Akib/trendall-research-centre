@@ -18,7 +18,7 @@ const News = () => {
                     <div className="flex items-center mb-2 space-x-2">                          
                             <p className="px-2 text-gray-800 bg-teal-400 rounded">  {anews.date}</p>
                         </div>
-                        <h3 className="mb-2 text-lg font-semibold leading-snug">
+                        <h3 className="mb-2 px-6 text-lg font-semibold leading-snug">
                             {anews.title}
                         </h3>
                       
