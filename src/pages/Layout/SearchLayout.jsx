@@ -180,8 +180,12 @@ const SearchLayout = () => {
     return (
         <>
             <Navbar />
-            <div className="grid grid-cols-12 w-[90%] mx-auto">
-                <div className="col-span-3 bg-white h-screen ">
+            <div className="md:grid grid-cols-12 w-[90%] mx-auto">
+
+
+               {/* Daybamic filter searching part Artefact Search left bar */}
+
+                <div className="md:col-span-3 bg-white h-screen ">
                     <div className="bg-white pt-14 menu overflow-y-scroll max-h-screen">
 
 
@@ -454,8 +458,9 @@ const SearchLayout = () => {
                         {/* Add more sections as needed */}
                     </div>
                 </div>
-
-                <div className="col-span-9 ">
+                 
+                 {/* Show Search Result Here */}
+                <div className="md:col-span-9 ">
                 <div className="pt-14 pl-6 overflow-y-scroll max-h-screen">
                     {/* Display filtered artifacts */}
 
@@ -477,11 +482,11 @@ const SearchLayout = () => {
                         <img className="h-64 w-64" src={searching} alt="" />
                         <h1 className="text-center font-semibold text-2xl text-red-600">No records found</h1>
                         <p className="mt-2">There are no results matching your search '{activeFilters}'. <br />
-<strong>Suggestions:</strong>
-<li>Make sure that all words are spelled correctly.</li>
-</p>
+                        <strong>Suggestions:</strong>
+                        <li>Make sure that all words are spelled correctly.</li>
+                        </p>
                         </div>}
-                    {/* <Outlet /> */}
+                 
                     </div>
 
 
@@ -522,7 +527,7 @@ const SearchLayout = () => {
     </div>:''
 }            
 
-        </div>
+           </div>
     </div>
 </>
     );
