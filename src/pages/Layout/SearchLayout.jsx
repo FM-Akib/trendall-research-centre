@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-
+import searching from '../../assets/searchError.png';
 
 
 const SearchLayout = () => {
@@ -13,9 +13,11 @@ const SearchLayout = () => {
     const [visiblePages, setVisiblePages] = useState(10);
     const [startIndex, setStartIndex] = useState(0);
     const [endIndex, setEndIndex] = useState(visiblePages - 1);
+    
+    const [search, setSearch] = useState("");
+    const [searchPainter, setSearchPainter] = useState("");
 
-
-
+console.log(searchPainter)
 
 
     // Function to toggle the visibility of the answer
@@ -171,6 +173,8 @@ const SearchLayout = () => {
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
       );
+
+     
     return (
         <>
             <Navbar />
@@ -218,7 +222,11 @@ const SearchLayout = () => {
                                         <div className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-2'] ? '' : 'hidden' }`}
                                                 id="answer-2">
-                                                   <form onSubmit={handleSearch} className="flex w-full justify-center items-center ">
+
+
+{/* UnderConstraction */}
+
+                                                   <form onSubmit={handleSearch} onChange={(e)=>{setSearch(e.target.value)}} className="flex w-full justify-center items-center ">
                                                         <div className="flex relative rounded-md w-full">
                                                             <input type="text" name="q" id="query" placeholder="search"
                                                                 className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
@@ -242,7 +250,7 @@ const SearchLayout = () => {
                                         {/*End search bar in attributes */}
 
                                         {
-                                            uniqueArtifactType.map(aArtifact => <div key={aArtifact}
+                                            uniqueArtifactType.filter((item) => { return search.toLowerCase()===''? item : item.toLowerCase().includes(search)}).map(aArtifact => <div key={aArtifact}
                                                 className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-2'] ? '' : 'hidden' // Show if this answer is open
                                                     }`}
@@ -281,7 +289,7 @@ const SearchLayout = () => {
                                         <div className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-3'] ? '' : 'hidden' }`}
                                                 id="answer-3">
-                                                   <form onSubmit={handleSearch} className="flex w-full justify-center items-center ">
+                                                   <form onSubmit={handleSearch}  onChange={(e)=>{setSearch(e.target.value)}} className="flex w-full justify-center items-center ">
                                                         <div className="flex relative rounded-md w-full">
                                                             <input type="text" name="q" id="query" placeholder="search"
                                                                 className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
@@ -305,7 +313,7 @@ const SearchLayout = () => {
                                         {/*End search bar in attributes */}
                                        
                                         {
-                                            uniquePainter.map(aArtifact => <div key={aArtifact}
+                                            uniquePainter.filter((item) => { return search.toLowerCase()===''? item : item?.toLowerCase().includes(search)}).map(aArtifact => <div key={aArtifact}
                                                 className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-3'] ? '' : 'hidden' // Show if this answer is open
                                                     }`}
@@ -344,7 +352,7 @@ const SearchLayout = () => {
                                         <div className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-4'] ? '' : 'hidden' }`}
                                                 id="answer-4">
-                                                   <form onSubmit={handleSearch} className="flex w-full justify-center items-center ">
+                                                   <form onSubmit={handleSearch} onChange={(e)=>{setSearch(e.target.value)}} className="flex w-full justify-center items-center ">
                                                         <div className="flex relative rounded-md w-full">
                                                             <input type="text" name="q" id="query" placeholder="search"
                                                                 className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
@@ -368,7 +376,7 @@ const SearchLayout = () => {
                                         {/*End search bar in attributes */}
                                        
                                         {
-                                            uniqueProvenance.map(aProvenance => <div key={aProvenance}
+                                            uniqueProvenance.filter((item) => { return search.toLowerCase()===''? item : item?.toLowerCase().includes(search)}).map(aProvenance => <div key={aProvenance}
                                                 className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-4'] ? '' : 'hidden' // Show if this answer is open
                                                     }`}
@@ -404,7 +412,7 @@ const SearchLayout = () => {
                                         <div className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-5'] ? '' : 'hidden' }`}
                                                 id="answer-5">
-                                                   <form onSubmit={handleSearch} className="flex w-full justify-center items-center ">
+                                                   <form onSubmit={handleSearch} onChange={(e)=>{setSearch(e.target.value)}} className="flex w-full justify-center items-center ">
                                                         <div className="flex relative rounded-md w-full">
                                                             <input type="text" name="q" id="query" placeholder="search"
                                                                 className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
@@ -428,7 +436,7 @@ const SearchLayout = () => {
                                         {/*End search bar in attributes */}
                                        
                                         {
-                                            uniquePhysicalDimensions.map(aDimensions => <div key={aDimensions}
+                                            uniquePhysicalDimensions.filter((item) => { return search.toLowerCase()===''? item : item?.toLowerCase().includes(search)}).map(aDimensions => <div key={aDimensions}
                                                 className={`answer pt-2 pb-5 px-5 text-sm lg:text-base text-[#343E3A] font-medium ${
                                                     openAnswers['answer-5'] ? '' : 'hidden' // Show if this answer is open
                                                     }`}
@@ -449,12 +457,13 @@ const SearchLayout = () => {
                 <div className="col-span-9 ">
                 <div className="pt-14 pl-6 overflow-y-scroll max-h-screen">
                     {/* Display filtered artifacts */}
-                    {paginatedData.map((artifact, index) => (
+
+                    {paginatedData.length>0 ? paginatedData.map((artifact, index) => (
                         <div key={index} className="border-b border-gray-300 px-4 py-4">
                             <img className="h-28 rounded" src={artifact.URL ? artifact.URL: artifact.ImageId} alt={artifact.ImageId} />
                             <h2 className="text-xl font-bold text-gray-800">{artifact["Artefact Type"]}</h2>
-                            <h3 className="text-red-600"><span className="font-semibold">Painter:  </span> {artifact.Painter}</h3>
-                            <h3 className="text-red-600"><span className="font-semibold">Dimension:</span> {artifact["Physical Dimensions"]}</h3>
+                            <h3 className="text-gray-600"><span className="font-semibold">Painter:  </span> {artifact.Painter}</h3>
+                            <h3 className="text-gray-600"><span className="font-semibold">Dimension:</span> {artifact["Physical Dimensions"]}</h3>
                             <h3 className="text-gray-600"><span className="font-semibold">Artefact Number:</span> {artifact["Artefact Number"]}  </h3>
 
                             <p className="text-gray-600"><span className="font-semibold">Chapter:</span> {artifact.Chapter}</p>
@@ -463,14 +472,21 @@ const SearchLayout = () => {
                             <p className="text-gray-600"><span className="font-semibold">Description:</span> {artifact.Description}</p>
                             {/* Add more details as needed */}
                         </div>
-                    ))}
+                    )): <div className="flex flex-col justify-center items-center">
+                        <img className="h-64 w-64" src={searching} alt="" />
+                        <h1 className="text-center font-semibold text-2xl text-red-600">No records found</h1>
+                        <p className="mt-2">There are no results matching your search '{activeFilters}'. <br />
+<strong>Suggestions:</strong>
+<li>Make sure that all words are spelled correctly.</li>
+</p>
+                        </div>}
                     {/* <Outlet /> */}
                     </div>
 
 
 
 {/* pagination here */}
-<div className="flex flex-col items-center justify-center">
+{paginatedData.length>0 ? <div className="flex flex-col items-center justify-center">
     <div className="my-8">
         <button
           onClick={() => handleClick("prev")}
@@ -502,8 +518,8 @@ const SearchLayout = () => {
         </button>
       </div>
 
-    </div>
-                 
+    </div>:''
+}            
 
         </div>
     </div>
