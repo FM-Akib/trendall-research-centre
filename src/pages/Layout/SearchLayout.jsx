@@ -21,7 +21,6 @@ const SearchLayout = () => {
 
 
 
-
     // Function to toggle the visibility of the answer
     const toggleAnswer = (targetId) => {
         setOpenAnswers(prevState => ({
@@ -34,11 +33,14 @@ const SearchLayout = () => {
     const { data: allArtefacts = [], isPending, error } = useQuery({
         queryKey: ['all-artefacts'],
         queryFn: async () => {
-            const res = await fetch('https://trendall-research-center-server.vercel.app/artefacts-all');
+            const res = await fetch('https://trendall-research-center-server.vercel.app/artefacts');
             return res.json();
         },
         enabled: !!activeFilters, // Fetch data only when activeFilters change
     });
+
+    console.log(allArtefacts)
+
 
 //   Local computer server: http://localhost:5000/artefacts-all
 
@@ -231,7 +233,7 @@ const SearchLayout = () => {
 
 
 
-                                                   <form onSubmit={handleSearch} onChange={(e)=>{setSearch(e.target.value)}} className="flex w-full justify-center items-center ">
+                                                   <form onSubmit={handleSearch} onChange={(e)=>{setSearch(e.target.value.toLowerCase())}} className="flex w-full justify-center items-center ">
                                                         <div className="flex relative rounded-md w-full">
                                                             <input type="text" name="q" id="query" placeholder="search"
                                                                 className="w-full p-2 rounded-md border-1 border-r-white rounded-r-none bg-slate-100 border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none " />
@@ -466,22 +468,25 @@ const SearchLayout = () => {
 
                     {paginatedData.length>0 ? paginatedData.map((artifact, index) => (
                         <div key={index} className="border-b border-gray-300 px-4 py-4">
-                            <img className="h-28 rounded" src={artifact.URL ? artifact.URL: artifact.ImageId} alt={artifact.ImageId} />
+                            <img className="h-28 rounded" src={artifact.PlateURL ? artifact.PlateURL : 'Not found'}  />
                             <h2 className="text-xl font-bold text-gray-800">{artifact["Artefact Type"]}</h2>
                             <h3 className="text-gray-600"><span className="font-semibold">Painter:  </span> {artifact.Painter}</h3>
                             <h3 className="text-gray-600"><span className="font-semibold">Dimension:</span> {artifact["Physical Dimensions"]}</h3>
                             <h3 className="text-gray-600"><span className="font-semibold">Artefact Number:</span> {artifact["Artefact Number"]}  </h3>
 
                             <p className="text-gray-600"><span className="font-semibold">Chapter:</span> {artifact.Chapter}</p>
+                            <p className="text-gray-600"><span className="font-semibold">Plate:</span> {artifact.Plate}</p>
+                            <p className="text-gray-600"><span className="font-semibold">PlateURL:</span> <Link to={artifact.PlateURL} target="_blank">{artifact.PlateURL}</Link> </p>
                             <p className="text-gray-600"><span className="font-semibold">Provenance:</span> {artifact.Provenance}</p>
                             <p className="text-gray-600"><span className="font-semibold">Publications:</span> {artifact.Publications}</p>
                             <p className="text-gray-600"><span className="font-semibold">Description:</span> {artifact.Description}</p>
                             {/* Add more details as needed */}
+                            
                         </div>
                     )): <div className="flex flex-col justify-center items-center">
                         <img className="h-64 w-64" src={searching} alt="" />
                         <h1 className="text-center font-semibold text-2xl text-red-600">No records found</h1>
-                        <p className="mt-2">There are no results matching your search '{activeFilters}'. <br />
+                        <p className="mt-2">There are no results matching your search &quot;{activeFilters}&quot;. <br />
                         <strong>Suggestions:</strong>
                         <li>Make sure that all words are spelled correctly.</li>
                         </p>
