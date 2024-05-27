@@ -1,3 +1,9 @@
+/*
+Header Comment: AdvancedSearch Component
+Description: we remove this feature
+*/
+
+
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";

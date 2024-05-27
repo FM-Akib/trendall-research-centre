@@ -1,3 +1,9 @@
+/*
+Header Comment: 
+Component: BasicSearch
+Description: This component renders a basic search interface for searching the CLASSICAL ART RESEARCH CENTRE POTTERY DATABASE. It provides input fields for searching by various criteria such as Shape, Technique, Sub Technique, Painter or Potter, Inscription, Date, and Collection.
+*/
+
 import { Link } from "react-router-dom";
 
 const BasicSearch = () => {

@@ -1,3 +1,9 @@
+/*
+for testing we do this .It;s a component of advanced search and we romove this
+Header Comment:
+Component: ShowImage
+Description: This component fetches image data from a JSON file and displays the image details based on the image ID obtained from the URL parameters.
+*/
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 

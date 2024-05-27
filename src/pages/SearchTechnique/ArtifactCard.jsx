@@ -1,4 +1,8 @@
-
+/*
+Header Comment:
+Component: ArtifactCard
+Description: This component renders a card for displaying artifact information.
+*/
 const artifactCard = ({data}) => {
 
     return (

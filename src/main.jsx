@@ -32,6 +32,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout></Layout>,
     children: [
+       // Main routes
       {
         path:"/",
         element: <Home></Home>
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
       }
     ]
   },
+   // Search routes
   {
     path:'searchtec',
     element: <SearchLayout></SearchLayout>,
@@ -83,6 +85,7 @@ const router = createBrowserRouter([
     ]
   }
 ]);
+// Render the app
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
